@@ -34,6 +34,14 @@ public class Node
         return Children![keyIndex].FindNode(searchKey);
     }
 
+    public void InsertValue(int value)
+    {
+        var nodeToInsert = FindNode(value);
+        
+        nodeToInsert.Keys = nodeToInsert.Keys.Append(value).ToArray();
+        Array.Sort(nodeToInsert.Keys);
+    }
+
     public string WriteKeys()
     {
         return string.Join(",", Keys);
