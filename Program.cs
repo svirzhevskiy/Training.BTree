@@ -18,4 +18,4 @@ var root = new Node([10, 20, 30], [
     ]),
 ]);
 
-Console.Write(root.Find(22));
+Console.WriteLine(root.FindNode(26).WriteKeys());

@@ -8,24 +8,34 @@ public class Node
         Children = children;
     }
 
-    public int[] Keys { get; set; }
-    public Node[]? Children { get; set; }
+    private int[] Keys { get; set; }
+    private Node[]? Children { get; set; }
 
-    public bool IsLeaf => Children is null || Children.Length == 0;
+    private bool IsLeaf => Children is null || Children.Length == 0;
 
-    public int Find(int searchKey)
+    public Node FindNode(int searchKey)
     {
         if (IsLeaf)
         {
-            return Array.Find(Keys, key => key == searchKey);
+            return this;
         }
         
         var keyIndex = 0;
         while (searchKey > Keys[keyIndex])
         {
             keyIndex++;
+
+            if (keyIndex == Keys.Length)
+            {
+                break;
+            }
         }
 
-        return Children![keyIndex].Find(searchKey);
+        return Children![keyIndex].FindNode(searchKey);
+    }
+
+    public string WriteKeys()
+    {
+        return string.Join(",", Keys);
     }
 }
